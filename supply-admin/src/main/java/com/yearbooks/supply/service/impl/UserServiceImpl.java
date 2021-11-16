@@ -18,7 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.annotation.Resource;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -89,6 +92,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         AssertUtil.isTrue(!(this.updateById(user)), "用户密码更新失败!");
     }
 
+    /**
+     * 获取用户信息实现。
+     * @param userQuery
+     * @return
+     */
     @Override
     public Map<String, Object> userList(UserQuery userQuery) {
         IPage<User> page = new Page<User>(userQuery.getPage(), userQuery.getLimit());
@@ -104,5 +112,44 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         map.put("data", page.getRecords());
         map.put("count", page.getTotal());
         return map;
+    }
+
+    /**
+     * 用户名：1.非空；2.不可重复；3.用户密码123456；4.用户有效，setIs_del=0;
+     * @param user
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void saveUser(User user) {
+        AssertUtil.isTrue(StringUtils.isBlank(user.getUsername()),"用户名不能为空!");
+        AssertUtil.isTrue(null!=this.findUserByName(user.getUsername()),"用户已经存在!");
+        user.setIsDel(0);
+        AssertUtil.isTrue(!this.save(user),"用户添加失败!");
+    }
+
+    /**
+     * 用户名:1.非空；2.不可能重复；
+     * @param user
+     */
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void updateUser(User user) {
+        AssertUtil.isTrue(StringUtils.isBlank(user.getUsername()),"用户名不能为空!");
+        User temp = this.findUserByName(user.getUsername());
+        AssertUtil.isTrue(null!=temp && !(temp.getId().equals(user.getId())),"用户名已经存在!");
+        AssertUtil.isTrue(!this.updateById(user),"用户记录更新失败!");
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    public void deleteUser(Integer[] ids) {
+        AssertUtil.isTrue(null==ids || ids.length==0,"请选择待删除的记录!");
+        List<User> users = new ArrayList<User>();
+        for (Integer id : ids) {
+            User temp = this.getById(id);
+            temp.setIsDel(1);
+            users.add(temp);
+        }
+        AssertUtil.isTrue(!this.updateBatchById(users),"用户记录删除失败!");
     }
 }

@@ -5,6 +5,7 @@ import com.yearbooks.supply.model.RespBean;
 import com.yearbooks.supply.pojo.User;
 import com.yearbooks.supply.query.UserQuery;
 import com.yearbooks.supply.service.IUserService;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.management.Query;
+import java.awt.image.RescaleOp;
 import java.security.Principal;
 import java.util.Map;
 
@@ -91,18 +93,75 @@ public class UserController {
     }
 
     /**
-     *
+     * 1.打开用户主页面
      * @return
      */
-    @RequestMapping("index")
+    @RequestMapping("index")//该处index与前端main.ftl中
     public String index(){
         return "user/user";
     }
 
+    /**
+     * 1.获取用户有效记录。
+     * @param userQuery
+     * @return
+     */
     @RequestMapping("list")
     @ResponseBody
     public Map<String,Object> userList(UserQuery userQuery){
         return userService.userList(userQuery);
+    }
+    /*=====================================添加或修改用户======================================*/
+
+    /**
+     * 打开增加用户或修改用户页面：
+     * 总结：此时不涉及其他页面。只在controller页面体现。
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("addOrUpdateUserPage")//跟user.js页面的接口保持一致：/user/addOrUpdateUserPage。/user/与controller类的注释名称保持一致。
+    public String addOrUpdatePage(Integer id,Model model){
+        if (null!=id){
+            model.addAttribute("user",userService.getById(id));
+        }
+        return "user/add_update";
+    }
+
+    /**
+     * 添加用户；
+     * @param user
+     * @return
+     */
+    @RequestMapping("save")
+    @ResponseBody
+    public RespBean saveUser(User user){
+        userService.saveUser(user);
+        return RespBean.success("用户添加成功!");
+    }
+
+    /**
+     * 更新用户；
+     * @param user
+     * @return
+     */
+    @RequestMapping("update")
+    @ResponseBody
+    public RespBean updateUser(User user){
+        userService.updateUser(user);
+        return RespBean.success("用户更新成功!");
+    }
+
+    /**
+     * 删除用户
+     * @param ids
+     * @return
+     */
+    @RequestMapping("delete")
+    @ResponseBody
+    public RespBean deleteUser(Integer[] ids){
+        userService.deleteUser(ids);
+        return RespBean.success("用户删除成功!");
     }
 
 

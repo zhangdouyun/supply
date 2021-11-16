@@ -1,7 +1,7 @@
 server:
   port: 8686
   servlet:
-    context-path: /yearbooks
+    context-path: /
 
 spring:
    datasource:

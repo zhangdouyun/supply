@@ -46,5 +46,28 @@ public interface IUserService extends IService<User> {
      */
     void updateUserPassword(String userName, String oldPassword, String newPassword, String confirmPassword);
 
+    /**
+     * 获取用户信息的接口。
+     * @param userQuery
+     * @return
+     */
     Map<String, Object> userList(UserQuery userQuery);
+
+    /**
+     * 添加用户
+     * @param user
+     */
+    void saveUser(User user);
+
+    /**
+     * 修改用户
+     * @param user
+     */
+    void updateUser(User user);
+
+    /**
+     * 删除用户接口
+     * @param ids
+     */
+    void deleteUser(Integer[] ids);
 }

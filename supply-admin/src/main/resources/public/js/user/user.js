@@ -15,11 +15,21 @@ layui.use(['table','layer',"form"],function(){
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: "id", title:'编号',fixed:"true", width:80},
-            {field: 'username', title: '用户姓名', minWidth:50, align:"left"},
-            {field: 'bz', title: '江湖花名', minWidth:100, align:'left'},
-            {field: 'trueName', title: '真实姓名', align:'left'},
-            {field: 'remarks', title: '江湖经历', align:'left',minWidth:150},
+            {field: "id", title:'编号',fixed:"true", width:80,align:"center" ,templet:function (d) {
+                    return '<div style="text-align: left">'+d.id+'</div>'
+                } },
+            {field: 'username', title: '用户姓名', minWidth:50, align:"center",templet: function (d) {
+                    return '<div style="text-align: left">'+d.username+'</div>'
+                } },
+            {field: 'bz', title: '江湖花名', minWidth:100, align:'center',templet:function (d) {
+                    return '<div style="text-align: left">'+d.bz+'</div>'
+                }},
+            {field: 'trueName', title: '真实姓名', align:'center',templet:function (d) {
+                    return '<div style="text-align: left">'+d.trueName+'</div>'
+                }},
+            {field: 'remarks', title: '江湖经历', align:'center',minWidth:150,templet:function (d) {
+                    return '<div style="text-align: left">'+d.remarks+'</div>'
+                }},
             {title: '操作', minWidth:150, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -71,7 +81,7 @@ layui.use(['table','layer',"form"],function(){
     });
     // 打开添加用户页面
     function openAddOrUpdateUserDialog(uid){
-        var url  =  ctx+"/user/addOrUpdateUserPage";
+        var url  =  ctx+"/user/addOrUpdateUserPage";//注意：和controller保持一致。
         var title="用户管理-用户添加";
         if(uid){
             url = url+"?id="+uid;

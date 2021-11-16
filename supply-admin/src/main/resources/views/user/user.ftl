@@ -13,11 +13,12 @@
 					<input type="text" name="userName"
 						   class="layui-input
 					searchVal" placeholder="用户名" />
-				</div>
+				</div>&nbsp;
 				<a class="layui-btn search_btn" data-type="reload"><i
 							class="layui-icon">&#xe615;</i> 搜索</a>
 			</div>
 		</form>
+		<hr/>
 	</blockquote>
 	<table id="userList" class="layui-table"  lay-filter="users"></table>
 
