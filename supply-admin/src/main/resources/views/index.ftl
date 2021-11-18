@@ -55,10 +55,11 @@
 <div class="main-body">
     <div class="login-main">
         <div class="login-top">
-            <span>进销存系统登录</span>
+            <span style="font-size:24px;font-family: '微软雅黑'">中国民用航空局安全保障财务考核</span>
             <span class="bg1"></span>
             <span class="bg2"></span>
         </div>
+
         <form class="layui-form login-bottom" action="">
             <div class="center">
                 <div class="item">

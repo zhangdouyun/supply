@@ -66,7 +66,6 @@ public class UserController {
         return RespBean.success("用户信息更新成功!");
     }
 
-
     /**
      * 更新密码页面
      * @return
@@ -77,7 +76,7 @@ public class UserController {
     }
 
     /**
-     *
+     * 更新用户密码
      * @param principal
      * @param oldPassword
      * @param newPassword
@@ -92,6 +91,7 @@ public class UserController {
         return RespBean.success("用户密码更新成功");
     }
 
+    /*=====================================《1》用户篇：查询、添加、修改或删除用户======================================*/
     /**
      * 1.打开用户主页面
      * @return
@@ -102,7 +102,7 @@ public class UserController {
     }
 
     /**
-     * 1.获取用户有效记录。
+     * 2.获取用户有效记录。
      * @param userQuery
      * @return
      */
@@ -111,10 +111,9 @@ public class UserController {
     public Map<String,Object> userList(UserQuery userQuery){
         return userService.userList(userQuery);
     }
-    /*=====================================添加或修改用户======================================*/
 
     /**
-     * 打开增加用户或修改用户页面：
+     * 3.打开增加用户或修改用户页面：
      * 总结：此时不涉及其他页面。只在controller页面体现。
      * @param id
      * @param model
@@ -129,7 +128,7 @@ public class UserController {
     }
 
     /**
-     * 添加用户；
+     * 4.添加用户；
      * @param user
      * @return
      */
@@ -141,7 +140,7 @@ public class UserController {
     }
 
     /**
-     * 更新用户；
+     * 5.更新用户；
      * @param user
      * @return
      */
@@ -153,7 +152,7 @@ public class UserController {
     }
 
     /**
-     * 删除用户
+     * 6.删除用户
      * @param ids
      * @return
      */
@@ -163,9 +162,6 @@ public class UserController {
         userService.deleteUser(ids);
         return RespBean.success("用户删除成功!");
     }
-
-
-
 
 
 }

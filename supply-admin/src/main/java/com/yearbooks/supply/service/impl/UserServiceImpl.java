@@ -10,6 +10,7 @@ import com.yearbooks.supply.pojo.User;
 import com.yearbooks.supply.query.UserQuery;
 import com.yearbooks.supply.service.IUserService;
 import com.yearbooks.supply.utils.AssertUtil;
+import com.yearbooks.supply.utils.PageResultUtil;
 import com.yearbooks.supply.utils.StringUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -93,7 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     /**
-     * 获取用户信息实现。
+     * 获取用户信息实现。-实现类
      * @param userQuery
      * @return
      */
@@ -106,12 +107,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             queryWrapper.like("user_name", userQuery.getUserName());
         }
         page = this.baseMapper.selectPage(page, queryWrapper);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("code", 0);
-        map.put("msg", "");
-        map.put("data", page.getRecords());
-        map.put("count", page.getTotal());
-        return map;
+        return PageResultUtil.getResult(page.getTotal(),page.getRecords());
     }
 
     /**
