@@ -162,6 +162,4 @@ public class UserController {
         userService.deleteUser(ids);
         return RespBean.success("用户删除成功!");
     }
-
-
 }

@@ -4,6 +4,7 @@ import com.yearbooks.supply.pojo.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yearbooks.supply.query.RoleQuery;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,5 +48,19 @@ public interface IRoleService extends IService<Role> {
      * @param id
      */
     void deleteRole(Integer id);
+
+    /**
+     * 1.通过用户id查询所有角色；
+     * @param userId
+     * @return
+     */
+    List<Map<String, Object>> queryAllRoles(Integer userId);
+
+    /**
+     * 添加权限
+     * @param roleId
+     * @param mids
+     */
+    void addGrant(Integer roleId, Integer[] mids);
 
 }

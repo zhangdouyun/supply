@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -87,5 +88,41 @@ public class RoleController {
         roleService.deleteRole(id);
         return RespBean.success("角色删除成功!");
     }
+
+    /*========================================7.角色：查询所有角色；=====================================*/
+
+
+    @RequestMapping("queryAllRoles")
+    @ResponseBody
+    public List<Map<String,Object>> queryAllRoles(Integer userId){
+        return roleService.queryAllRoles(userId);
+    }
+
+    /**
+     * 权限添加页面
+     * @param roleId
+     * @param model
+     * @return
+     */
+    @RequestMapping("toAddGrantPage")
+    public String toAddGrantPage(Integer roleId,Model model){
+        model.addAttribute("roleId",roleId);
+        return "role/grant";
+    }
+
+
+    /**
+     * 角色授权接口
+     * @param roleId
+     * @param mids
+     * @return
+     */
+    @RequestMapping("addGrant")
+    @ResponseBody
+    public RespBean addGrant(Integer roleId,Integer[] mids){
+        roleService.addGrant(roleId,mids);
+        return RespBean.success("角色记录授权成功!");
+    }
+
 
 }

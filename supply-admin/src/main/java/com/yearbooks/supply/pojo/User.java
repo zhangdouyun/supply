@@ -54,9 +54,11 @@ public class User implements Serializable, UserDetails {
     @ApiModelProperty(value = "是否删除")
     private Integer isDel;
 
-
     @TableField(exist = false)
     Collection<? extends GrantedAuthority>  authorities;
+
+    @TableField(exist = false)
+    private String roleIds;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
