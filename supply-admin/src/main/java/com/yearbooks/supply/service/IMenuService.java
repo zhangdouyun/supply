@@ -21,9 +21,17 @@ public interface IMenuService extends IService<Menu> {
 
     Map<String, Object> menuList();
 
-    void saveMenu(java.awt.Menu menu);
+    Menu findMenuByNameAndGrade(String menuName,Integer grade);
 
-    void updateMenu(java.awt.Menu menu);
+    Menu findMenuByAclValue(String aclValue);
+
+    Menu findMenuById(Integer id);
+
+    Menu findMenuByGradeAndUrl(String url,Integer grade);
+
+    void saveMenu(Menu menu);
+
+    void updateMenu(Menu menu);
 
     void deleteMenuById(Integer id);
 }

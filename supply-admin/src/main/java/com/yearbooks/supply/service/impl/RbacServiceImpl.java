@@ -30,7 +30,6 @@ public class RbacServiceImpl  implements IRbacService {
         return userRoleService.findRolesByUserName(userName);
     }
 
-
     @Override
     public List<String> findAuthoritiesByRoleName(List<String> roleNames) {
         return roleMenuService.findAuthoritiesByRoleName(roleNames);

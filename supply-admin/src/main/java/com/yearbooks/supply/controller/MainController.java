@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @className  MainController
  * @description TODO
  * @since 2021-10-25 23:11
+ * 1.基础页面，未发现service注释注入。
  */
 
 @Controller

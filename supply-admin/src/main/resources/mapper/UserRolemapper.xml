@@ -17,9 +17,9 @@
         select
                r.NAME
         FROM
-                t_user_role ur
-                left join t_user u on ur.user_id=u.id
-                left join t_role r on ur.role_id=r.id
+                supply.t_user_role ur
+                left join supply.t_user u on ur.user_id=u.id
+                left join supply.t_role r on ur.role_id=r.id
         where
                 r.is_del=0
                 and u.user_name=#{userName}

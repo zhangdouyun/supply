@@ -6,14 +6,13 @@ import com.yearbooks.supply.model.RespBean;
 import com.yearbooks.supply.service.IMenuService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.yearbooks.supply.pojo.Menu;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.annotation.Resource;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
+
     @Resource
     private IMenuService menuService;
 

@@ -55,32 +55,24 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         return PageResultUtil.getResult((long) menus.size(),menus);
     }
 
-    @Override
-    public void saveMenu(java.awt.Menu menu) {
 
-    }
 
     @Override
-    public void updateMenu(java.awt.Menu menu) {
-
-    }
-
-
     public Menu findMenuByNameAndGrade(String menuName,Integer grade) {
         return this.getOne(new QueryWrapper<Menu>().eq("is_del",0).eq("name",menuName).eq("grade",grade));
     }
 
-
+    @Override
     public Menu findMenuByAclValue(String aclValue) {
         return this.getOne(new QueryWrapper<Menu>().eq("is_del",0).eq("acl_value",aclValue));
     }
 
-
+    @Override
     public Menu findMenuById(Integer id) {
         return this.getOne(new QueryWrapper<Menu>().eq("is_del",0).eq("id",id));
     }
 
-
+    @Override
     public Menu findMenuByGradeAndUrl(String url, Integer grade) {
         return this.getOne(new QueryWrapper<Menu>().eq("is_del",0).eq("url",url).eq("grade",grade));
     }

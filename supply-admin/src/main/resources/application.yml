@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8080
   servlet:
     context-path: /
 
@@ -40,7 +40,7 @@ spring:
 # Mybatis-plus配置
 mybatis-plus:
   #配置Mapper映射文件
-  mapper-locations: classpath*:/mapper/*Mapper.xml
+  mapper-locations: classpath*:/mapper/*mapper.xml
   # 配置MyBatis数据返回类型别名（默认别名是类名）
   type-aliases-package: com.yearbooks.supply.pojo
   configuration:

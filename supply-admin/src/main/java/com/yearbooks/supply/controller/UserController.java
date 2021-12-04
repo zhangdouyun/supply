@@ -5,15 +5,13 @@ import com.yearbooks.supply.model.RespBean;
 import com.yearbooks.supply.pojo.User;
 import com.yearbooks.supply.query.UserQuery;
 import com.yearbooks.supply.service.IUserService;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.management.Query;
-import java.awt.image.RescaleOp;
 import java.security.Principal;
 import java.util.Map;
 
@@ -97,8 +95,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("index")//该处index与前端main.ftl中
+    @PreAuthorize("hasAngAuthority('1010')")
     public String index(){
-        return "user/user";
+        return "user/user";//注意：第一个user是指文件夹名；后面一个user是user.ftl前缀user；意思是启动该文件。
     }
 
     /**

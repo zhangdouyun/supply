@@ -19,5 +19,10 @@
     <sql id="Base_Column_List">
         id, icon, name, state, url, p_id, acl_value, grade, is_del
     </sql>
+    <select id="queryAllMenus" resultType="com.yearbooks.supply.dto.TreeDto">
+        select id,p_id as pId,name
+        from supply.t_menu
+        where is_del =0
+    </select>
 
 </mapper>

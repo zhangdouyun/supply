@@ -2,10 +2,10 @@ layui.use(['form', 'layer','formSelects'], function () {
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery;
-        formSelects = layui.formSelects;
+    var formSelects = layui.formSelects;
 
 
-    var userId=$("input[name='id']").val();
+    var userId=$("[name='id']").val();
     formSelects.config('selectId',{
         type:"post",
         searchUrl:ctx+"/role/queryAllRoles?userId="+userId,
@@ -46,5 +46,4 @@ layui.use(['form', 'layer','formSelects'], function () {
         // iframe 页面关闭 添加parent
         parent.layer.closeAll();
     })
-
 });

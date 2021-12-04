@@ -59,7 +59,6 @@ layui.use(['table','layer'],function(){
         };
     });
 
-
     /**
      * 行监听
      */

@@ -125,5 +125,4 @@ public class Menu implements Serializable {
         this.isDel = isDel;
     }
 
-
 }

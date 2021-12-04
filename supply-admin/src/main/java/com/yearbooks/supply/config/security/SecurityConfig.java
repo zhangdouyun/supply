@@ -2,6 +2,7 @@ package com.yearbooks.supply.config.security;
 
 import com.yearbooks.supply.filters.CaptchaCodeFilter;
 import com.yearbooks.supply.pojo.User;
+import com.yearbooks.supply.service.IRbacService;
 import com.yearbooks.supply.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,6 +24,8 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zhangdouyun
@@ -43,8 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SupplyLogoutSuccessHandler supplyLogoutSuccessHandler;
     @Resource
     private CaptchaCodeFilter captchaCodeFilter;
-    @Autowired
+    @Resource
     private DataSource dataSource;
+    @Resource
+    private IRbacService rbacService;
 
 
     /**
@@ -92,6 +98,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
     }
 
+    //免登陆
     @Bean
     public PersistentTokenRepository persistentTokenRepository(){
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
@@ -105,7 +112,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 User userDetails = userService.findUserByName(username);
-                System.out.println(userDetails.toString());
+                /**
+                 * 1.查询用户分配的角色；
+                 * 2.根据用户扮演的角色查询角色拥有的权限记录；
+                 */
+                List<String> roleNames = rbacService.findRolesByUserName(username);
+                List<String> authorities = rbacService.findAuthoritiesByRoleName(roleNames);
+
+                //转化为流；
+                roleNames.stream().map(role->"role_"+role).collect(Collectors.toList());
+
+                authorities.addAll(roleNames);
+                userDetails.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(String
+                        .join(",",authorities)));
                 return userDetails;
             }
         };
