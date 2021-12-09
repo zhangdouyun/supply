@@ -16,7 +16,7 @@
     </sql>
     <select id="queryRoleHasAllMenusByRoleId" resultType="java.lang.Integer">
         SELECT menu_id
-        FROM t_role_menu
+        FROM supply.t_role_menu
         WHERE role_id = #{roleId}
     </select>
     <select id="findAuthoritiesByRoleName" resultType="java.lang.String">

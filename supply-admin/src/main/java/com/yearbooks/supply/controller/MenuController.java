@@ -4,6 +4,7 @@ package com.yearbooks.supply.controller;
 import com.yearbooks.supply.dto.TreeDto;
 import com.yearbooks.supply.model.RespBean;
 import com.yearbooks.supply.service.IMenuService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.yearbooks.supply.pojo.Menu;
@@ -50,6 +51,7 @@ public class MenuController {
      * @return
      */
     @RequestMapping("/index")
+    @PreAuthorize("hasAnyAuthority('1030')")
     public String index() {
         return "menu/menu";
     }

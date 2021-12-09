@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public String accessDeniedException(AccessDeniedException e){
-        return "403";
-    }
 
     @ExceptionHandler(ParamsException.class)
     @ResponseBody
@@ -30,6 +26,10 @@ public class GlobalExceptionHandler {
         return RespBean.error(e.getMsg());
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public String accessDeniedException(AccessDeniedException e){
+        return "403";
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody

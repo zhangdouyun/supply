@@ -27,12 +27,11 @@ public class CaptchaController {
     public DefaultKaptcha defaultKaptcha;
 
     /**
-     *
      * @param session
      * @param response
      * @throws IOException
      */
-    @RequestMapping(value="/image",method = RequestMethod.GET)
+    @RequestMapping(value = "/image", method = RequestMethod.GET)
     public void kaptcha(HttpSession session, HttpServletResponse response) throws IOException {
         response.setDateHeader("Expires", 0);
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
@@ -42,10 +41,10 @@ public class CaptchaController {
         // 验证码文字
         String capText = defaultKaptcha.createText();
         // 将验证码存入session 并设置2分钟后过期
-        session.setAttribute("captcha_key",new CaptchaImageModel(capText,2*60));
+        session.setAttribute("captcha_key", new CaptchaImageModel(capText, 2 * 60));
         ServletOutputStream out = response.getOutputStream();
-        BufferedImage bufferedImage =defaultKaptcha.createImage(capText);
-        ImageIO.write(bufferedImage,"jpg",out);
+        BufferedImage bufferedImage = defaultKaptcha.createImage(capText);
+        ImageIO.write(bufferedImage, "jpg", out);
         out.flush();
     }
 }

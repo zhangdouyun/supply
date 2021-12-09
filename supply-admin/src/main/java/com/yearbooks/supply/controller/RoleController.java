@@ -5,6 +5,7 @@ import com.yearbooks.supply.model.RespBean;
 import com.yearbooks.supply.pojo.Role;
 import com.yearbooks.supply.query.RoleQuery;
 import com.yearbooks.supply.service.IRoleService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,11 +41,12 @@ public class RoleController {
      * @return
      */
     @RequestMapping("index")//在main主页面：data-tab="role/index"斜杠前role为第17行/role。
+    @PreAuthorize("hasAnyAuthority('1020')")
     public String index() {
         return "role/role";
     }
-    /*========================================2.角色：获取角色；========================================*/
 
+    /*========================================2.角色：获取角色；========================================*/
     /**
      * @param roleQuery
      * @return

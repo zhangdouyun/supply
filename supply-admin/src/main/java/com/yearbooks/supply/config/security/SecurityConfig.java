@@ -1,11 +1,13 @@
 package com.yearbooks.supply.config.security;
 
+import com.yearbooks.supply.config.ClassPathTldsLoader;
 import com.yearbooks.supply.filters.CaptchaCodeFilter;
 import com.yearbooks.supply.pojo.User;
 import com.yearbooks.supply.service.IRbacService;
 import com.yearbooks.supply.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -100,7 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //免登陆
     @Bean
-    public PersistentTokenRepository persistentTokenRepository(){
+    public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
         return tokenRepository;
@@ -120,11 +122,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 List<String> authorities = rbacService.findAuthoritiesByRoleName(roleNames);
 
                 //转化为流；
-                roleNames.stream().map(role->"role_"+role).collect(Collectors.toList());
+                roleNames = roleNames.stream().map(role -> "role_" + role).collect(Collectors.toList());
 
                 authorities.addAll(roleNames);
-                userDetails.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(String
-                        .join(",",authorities)));
+                userDetails.setAuthorities(AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", authorities)));
                 return userDetails;
             }
         };
@@ -139,4 +140,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService()).passwordEncoder(encoder());
     }
+
+    /**
+     * 加载ClassPathTldsLoader;
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean(ClassPathTldsLoader.class)
+    public ClassPathTldsLoader classPathTldsLoader(){
+        return new ClassPathTldsLoader();
+    }
+
 }

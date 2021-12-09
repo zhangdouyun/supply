@@ -95,7 +95,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("index")//该处index与前端main.ftl中
-    @PreAuthorize("hasAngAuthority('1010')")
+    @PreAuthorize("hasAnyAuthority('1010')")
     public String index(){
         return "user/user";//注意：第一个user是指文件夹名；后面一个user是user.ftl前缀user；意思是启动该文件。
     }
@@ -107,6 +107,7 @@ public class UserController {
      */
     @RequestMapping("list")
     @ResponseBody
+    @PreAuthorize("hasAnyAuthority('101003')")
     public Map<String,Object> userList(UserQuery userQuery){
         return userService.userList(userQuery);
     }
@@ -119,6 +120,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("addOrUpdateUserPage")//跟user.js页面的接口保持一致：/user/addOrUpdateUserPage。/user/与controller类的注释名称保持一致。
+    @PreAuthorize("hasAnyAuthority('101004')")
     public String addOrUpdatePage(Integer id,Model model){
         if (null!=id){
             model.addAttribute("user",userService.getById(id));
