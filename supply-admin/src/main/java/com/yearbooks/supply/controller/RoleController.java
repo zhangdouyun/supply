@@ -143,7 +143,6 @@ public class RoleController {
 
     /**
      * 角色授权接口
-     *
      * @param roleId
      * @param mids
      * @return

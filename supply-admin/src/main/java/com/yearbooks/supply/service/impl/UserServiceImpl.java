@@ -96,10 +96,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         user.setPassword(passwordEncoder.encode(newPassword));
         AssertUtil.isTrue(!(this.updateById(user)), "用户密码更新失败!");
     }
-
     /**
-     * 获取用户信息实现。-实现类
-     *
+     * 获取用户信息实现。-实现
      * @param userQuery
      * @return
      */
@@ -150,10 +148,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
          *   更新时
          *     如果用户存在原始角色记录
          *         如果存在  直接删除原来用户角色记录即可 重新添加新的用户角色记录
-         *
          *         如果不存在  直接执行添加即可
-         *
-         *
          * 实现思路
          *    首先查询用户原始分配角色
          *       如果存在原始用户角色记录  直接删除原来用户角色记录即可（根据用户id） 然后重新添加新的用户角色记录

@@ -132,6 +132,4 @@ public class MenuController {
         menuService.deleteMenuById(id);
         return RespBean.success("菜单删除成功");
     }
-
-
 }

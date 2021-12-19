@@ -18,4 +18,11 @@ public interface ICustomerService extends IService<Customer> {
 
     Map<String, Object> customerList(CustomerQuery customerQuery);
 
+    Customer findCustomerByName(String name);
+
+    void saveCustomer(Customer customer);
+
+    void updateCustomer(Customer customer);
+
+    void deleteCustomer(Integer[] ids);
 }

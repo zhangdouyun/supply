@@ -1,6 +1,8 @@
 package com.yearbooks.supply.controller;
 
 
+import com.yearbooks.supply.model.RespBean;
+import com.yearbooks.supply.pojo.Customer;
 import com.yearbooks.supply.query.CustomerQuery;
 import com.yearbooks.supply.service.ICustomerService;
 import org.springframework.ui.Model;
@@ -48,7 +50,7 @@ public class CustomerController {
     }
 
     /**
-     * ==========================3.客户管理：增加或修改=========================
+     * ==========================3.客户管理：增加或修改页=========================
      * @param id
      * @param model
      * @return
@@ -61,6 +63,42 @@ public class CustomerController {
         return "customer/add_update";
     }
 
+    /**
+     * ==========================4.客户管理：添加保存===========================
+     * 添加并保存
+     * @param customer
+     * @return
+     */
+    @RequestMapping("save")
+    @ResponseBody
+    public RespBean saveCustomer(Customer customer){
+        customerService.saveCustomer(customer);
+        return RespBean.success("记录添加成功!");
+    }
 
+    /**
+     * ==========================5.客户管理：添加保存===========================
+     * 更新用户信息
+     * @param customer
+     * @return
+     */
+    @RequestMapping("update")
+    @ResponseBody
+    public RespBean updateCustomer(Customer customer){
+        customerService.updateCustomer(customer);
+        return RespBean.success("记录更新成功!");
+    }
 
+    /**
+     * ==========================5.客户管理：添加保存===========================
+     * 删除用户
+     * @param ids
+     * @return
+     */
+    @RequestMapping("delete")
+    @ResponseBody
+    public RespBean deleteCustomer(Integer[] ids){
+        customerService.deleteCustomer(ids);
+        return RespBean.success("用户记录删除成功!");
+    }
 }
