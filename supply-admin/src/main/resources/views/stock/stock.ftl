@@ -6,7 +6,7 @@
 </head>
 <body class="childrenBody">
 
-<div class="layui-fluid">
+<div class="layui-bg-red">
 	<div class="layui-row layui-col-space15">
 		<!-- 左树 -->
 		<div class="layui-col-sm12 layui-col-md4 layui-col-lg3" style="width: 45%" >
@@ -21,17 +21,13 @@
 								<div class="layui-inline">
 									<div class="layui-input-inline">
 										<input type="text" name="goodsName"
-											   class="layui-input
-					searchVal" placeholder="商品名称" />
+											   class="layui-input searchVal" placeholder="商品名称" />
 									</div>
-									<a class="layui-btn search_btn" data-type="reload"><i
-												class="layui-icon">&#xe615;</i> 搜索</a>
+									<a class="layui-btn search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i> 搜索</a>
 								</div>
 							</form>
 						</blockquote>
 						<table id="goodsList01" class="layui-table"  lay-filter="goods01"></table>
-
-
 						<script id="goodsListBar01" type="text/html">
 							<a class="layui-btn layui-btn-xs" id="edit" lay-event="edit">添加商品到仓库</a>
 						</script>
@@ -47,9 +43,8 @@
 			<div class="layui-card">
 				<div class="layui-card-body">
 					<form class="layui-form" >
-
+						<#--注意：此表id=goodsList02与js的关系；首先注意table-->
 						<table id="goodsList02" class="layui-table"  lay-filter="goods02"></table>
-
 						<#--操作-->
 						<script id="goodsListBar02" type="text/html">
 							<a class="layui-btn layui-btn-xs" id="edit" lay-event="edit">修改库存或成本</a>
@@ -60,7 +55,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <script type="text/javascript" src="${ctx.contextPath}/js/stock/stock.js"></script>

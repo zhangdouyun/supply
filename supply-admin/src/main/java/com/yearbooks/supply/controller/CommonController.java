@@ -61,7 +61,6 @@ public class CommonController {
         model.addAttribute("goods",goodsModel);
         model.addAttribute("flag",1);
         return "common/goods_add_update";
-
     }
 
     /**
@@ -74,9 +73,11 @@ public class CommonController {
     }
 
 
-
-
-
+    @RequestMapping("stockList")
+    @ResponseBody
+    public Map<String,Object> stockList(GoodsQuery goodsQuery){
+        return goodsService.stockList(goodsQuery);
+    }
 
 
 }

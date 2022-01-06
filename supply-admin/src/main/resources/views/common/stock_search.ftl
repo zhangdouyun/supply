@@ -53,13 +53,6 @@
 	</div>
 </div>
 
-
-
-
-
-
-
-
 <script type="text/javascript" src="${ctx.contextPath}/js/common/stock.search.js"></script>
 </body>
 </html>

@@ -2,6 +2,9 @@ package com.yearbooks.supply.service;
 
 import com.yearbooks.supply.pojo.PurchaseListGoods;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yearbooks.supply.query.PurchaseListGoodsQuery;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IPurchaseListGoodsService extends IService<PurchaseListGoods> {
 
+
+    Map<String, Object> purchaseListGoodsList(PurchaseListGoodsQuery purchaseListGoodsQuery);
 }

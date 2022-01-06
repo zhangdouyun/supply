@@ -27,7 +27,6 @@ layui.use(['laydate','table','layer'],function() {
         }
     })
 
-
     var tableIns = table.render({
         elem: '#purchaseList',
         url: ctx + '/purchase/list',
@@ -108,8 +107,6 @@ layui.use(['laydate','table','layer'],function() {
         }
     });
 
-
-
     var tableIns02 = table.render({
         elem: '#purchaseListGoods',
         url: ctx + '/purchaseListGoods/list',
@@ -148,6 +145,5 @@ layui.use(['laydate','table','layer'],function() {
             }
         })
     }
-
 })
 

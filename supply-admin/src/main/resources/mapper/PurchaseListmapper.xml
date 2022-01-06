@@ -23,7 +23,33 @@
         select max(purchase_number) as purchaseNumber
         from supply.t_purchase_list
         where to_days(purchase_date)=to_days(now())
-
     </select>
+    <select id="purchaseList" resultType="com.yearbooks.supply.pojo.PurchaseList">
+        SELECT
+            pl.*,
+            u.user_name AS userName,
+            s.name AS supplierName
+        FROM t_purchase_list pl
+                 LEFT JOIN t_user AS u ON pl.user_id = u.id
+                 LEFT JOIN t_supplier AS s ON pl.supplier_id = s.id
+        <where>
+            <if test="null != purchaseListQuery.purchaseNumber and purchaseListQuery.purchaseNumber !='' ">
+                pl.purchase_number = #{purchaseListQuery.purchaseNumber}
+            </if>
+            <if test="null !=purchaseListQuery.supplierId">
+                and pl.supplier_id = #{purchaseListQuery.supplierId}
+            </if>
+            <if test="null != purchaseListQuery.state">
+                and pl.state = #{purchaseListQuery.state}
+            </if>
+            <if test=" null != purchaseListQuery.startDate and purchaseListQuery.startDate !='' ">
+                and pl.purchase_date &gt;=#{purchaseListQuery.startDate}
+            </if>
+            <if test="null != purchaseListQuery.endDate and purchaseListQuery.endDate !='' ">
+                and pl.purchase_date &lt;=#{purchaseListQuery.endDate}
+            </if>
+        </where>
+    </select>
+
 
 </mapper>

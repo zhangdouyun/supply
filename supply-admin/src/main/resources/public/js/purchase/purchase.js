@@ -24,22 +24,21 @@ layui.use(['element','laydate','table','layer'],function(){
         }
     })
 
-
-
-
      var tableIns =table.render({
         elem: '#purchaseList',
         height : "full-125",
         toolbar: "#toolbarDemo",
         id : "purchaseListTable",
         cols : [[
-            {field: 'code', title: '商品编码', minWidth:50, align:"center"},
-            {field: 'name', title: '商品名称', minWidth:100, align:'center'},
+            {field: 'code', title: '商品编码', minWidth:50, align:"center",},
+            {field: 'name', title: '商品名称', minWidth:100, align:'center',templet: function (d) {
+                    return '<div style="text-align: left">'+d.name+'</div>'
+                }},
             {field: 'model', title: '商品型号', minWidth:100, align:'center'},
-            {field: 'price', title: '单价', minWidth:100, align:'center'},
-            {field: 'num', title: '数量', minWidth:100, align:'center'},
+            {field: 'price', title: '单价', minWidth:100, align:'center',edit:'text'},
+            {field: 'num', title: '数量', minWidth:100, align:'center',edit:'text'},
             {field: 'unit', title: '单位', minWidth:100, align:'center'},
-            {field: 'total', title: '总金额', minWidth:100, align:'center'},
+            {field: 'total', title: '总金额', minWidth:100, align:'center',edit: 'text'},
             {title: '操作', minWidth:150, templet:'#goodsListBar',fixed:"right",align:"center"}
         ]],
         data:[]
@@ -48,10 +47,9 @@ layui.use(['element','laydate','table','layer'],function(){
     //头工具栏事件
     table.on('toolbar(purchases)', function(obj){
         switch(obj.event){
-            case "add":
+            case 'add':
                 openGoodsDialog();
                 break;
-
         };
     });
 
@@ -70,14 +68,14 @@ layui.use(['element','laydate','table','layer'],function(){
     /**
      * 行监听
      */
-    table.on("tool(purchases)", function(obj){
+    table.on('tool(purchases)', function(obj){
         var layEvent = obj.event;
-        if(layEvent === "edit") {
+        if(layEvent == 'edit') {/*注意：和ftl写法相呼应*/
             openUpdateGoodsInfoDialog(obj.data.id);
-        }else if(layEvent === "del") {
+        }else if(layEvent == 'del') {
             layer.confirm('确定移除当前商品？', {icon: 3, title: "商品选择"}, function (index) {
                 datas.forEach((item,i) => {
-                    if(item.id === obj.data.id){
+                    if(item.id == obj.data.id){
                         //console.log(item);
                         datas.splice(i,1);
                     }

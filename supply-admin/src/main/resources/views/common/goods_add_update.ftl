@@ -17,7 +17,7 @@
         <label class="layui-form-label">商品名</label>
         <div class="layui-input-block">
             <input type="text" class="layui-input name" readonly="readonly"
-                   name="name" id="name" value="${(goods.name)!}">
+                   name="name" id="name" value="${(goods.name)!""}">
         </div>
     </div>
     <br/>
@@ -33,10 +33,11 @@
             <label class="layui-form-label">商品类别</label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input minNum" readonly="readonly"
-                       name="typeName" id="typeName" value="${(goods.typeName)!}">
+                       name="typeName" id="typeName" value="${(goods.typeName)!""}">
             </div>
         </div>
     </div>
+        <br/>
     <div class="layui-row">
         <div class="layui-col-xs6">
             <label class="layui-form-label">商品型号</label>
@@ -69,15 +70,16 @@
             <label class="layui-form-label">当前库存</label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input inventoryQuantity" readonly="readonly"
-                       name="inventoryQuantity" id="inventoryQuantity" value="${(goods.inventoryQuantity)!}">
+                       name="inventoryQuantity" id="inventoryQuantity" value="${(goods.inventoryQuantity)!""}">
             </div>
         </div>
     </div>
+        <br/>
     </fieldset>
     <hr/>
     <div class="layui-row">
         <div class="layui-col-xs6">
-            <label class="layui-form-label">单价</label>
+            <label class="layui-form-label">采购单价</label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input sellingPrice"
                         name="price" id="price"
@@ -88,11 +90,10 @@
             <label class="layui-form-label">数量</label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input inventoryQuantity"
-                       name="num" id="num" value="${(goods.num)!}">
+                       name="num" id="num" value="${(goods.num)!""}">
             </div>
         </div>
     </div>
-
 
     <br/>
     <br/>
@@ -103,8 +104,6 @@
             <a class="layui-btn layui-btn-lg layui-btn-normal"  id="closeDlg" href="javascript:void(0)">取消</a>
         </div>
     </div>
-
-
 <script type="text/javascript" src="${ctx.contextPath}/js/common/goods.add.update.js"></script>
 </body>
 </html>

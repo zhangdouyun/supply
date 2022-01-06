@@ -9,18 +9,19 @@
 </head>
 <body class="childrenBody">
 
+<#--进货入库选择页-->
 
 <div class="layui-fluid">
 	<div class="layui-row layui-col-space15">
 		<!-- 左树 -->
-		<div class="layui-col-sm12 layui-col-md4 layui-col-lg3" style="width: 12%" >
+		<div class="layui-col-sm12 layui-col-md4 layui-col-lg9" style="width: 12%" >
 
 			<div class="layui-card-body">
 				<fieldset class="layui-elem-field layui-field-title" >
 					<legend style="font-size: 15px">商品类别</legend>
 				</fieldset>
 
-				<div id="goodsTypeTree" class="ztree">
+				<div   id="goodsTypeTree" class="ztree">
 				</div>
 				<input type="hidden" name="typeId"/>
 			</div>
@@ -37,12 +38,9 @@
 							<form class="layui-form">
 								<div class="layui-inline">
 									<div class="layui-input-inline">
-										<input type="text" name="goodsName"
-											   class="layui-input
-					searchVal" placeholder="商品名" />
+										<input type="text" name="goodsName" class="layui-input searchVal" placeholder="商品名" />
 									</div>
-									<a class="layui-btn search_btn" data-type="reload"><i
-												class="layui-icon">&#xe615;</i> 搜索</a>
+									<a class="layui-btn search_btn" data-type="reload"><i class="layui-icon">&#xe615;</i> 搜索</a>
 								</div>
 							</form>
 						</blockquote>
@@ -50,25 +48,14 @@
 
 						<#--操作-->
 						<script id="goodsListBar" type="text/html">
-							<a class="layui-btn layui-btn-xs" id="add" lay-event="add">选择</a>
+							<a  class="layui-btn layui-btn-xs" id="add" lay-event="add">选择</a>
 						</script>
-
 					</form>
-
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
-
-
-
-
-
-
-
-
 <script type="text/javascript" src="${ctx.contextPath}/js/common/goods.js"></script>
 </body>
 </html>

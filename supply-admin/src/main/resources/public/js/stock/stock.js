@@ -74,7 +74,7 @@ layui.use(['element','table','layer'],function(){
 
     //商品列表展示
     var  tableIns02 = table.render({
-        elem: '#goodsList02',
+        elem: '#goodsList02',/*注意与ftl中id属性相互呼应。*/
         url : ctx+'/stock/listHasInventoryQuantity',
         cellMinWidth : 95,
         page : true,
@@ -85,28 +85,28 @@ layui.use(['element','table','layer'],function(){
         id : "goodsListTable02",
         cols : [[
             {field: "id", title:'编号',fixed:"true", width:80},
-            {field: 'code', title: '商品编码', minWidth:50, align:"center",templet:function (d) {
+            {field: 'code', title: '商品编码', minWidth:50, align:"center",templet: function (d) {
                     return '<div style="text-align: left">'+d.code+'</div>'
                 }},
-            {field: 'name', title: '商品名称', minWidth:100, align:'center',templet:function (d) {
+            {field: 'name', title: '商品名称', minWidth:100, align:'center',templet: function (d) {
                     return '<div style="text-align: left">'+d.name+'</div>'
                 }},
-            {field: 'model', title: '商品型号', minWidth:50, align:'center',templet:function (d) {
+            {field: 'model', title: '商品型号', minWidth:50, align:'center',templet: function (d) {
                     return '<div style="text-align: left">'+d.model+'</div>'
                 }},
-            {field: 'typeName', title: '商品类别', minWidth:50, align:'center',templet:function (d) {
+            {field: 'typeName', title: '商品类别', minWidth:50, align:'center',templet: function (d) {
                     return '<div style="text-align: left">'+d.typeName+'</div>'
                 }},
-            {field: 'unitName', title: '单位', align:'center',templet:function (d) {
+            {field: 'unitName', title: '单位', align:'center',templet: function (d) {
                     return '<div style="text-align: left">'+d.unitName+'</div>'
                 }},
-            {field: 'inventoryQuantity', title: '库存', minWidth:50, align:'center',templet:function (d) {
+            {field: 'inventoryQuantity', title: '库存', minWidth:50, align:'center',templet: function (d) {
                     return '<div style="text-align: right">'+(d.inventoryQuantity.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</div>'
                 }},
-            {field: 'purchasingPrice', title: '成本价(￥)', minWidth:100, align:'center',templet:function (d) {
+            {field: 'purchasingPrice', title: '成本价(￥)', minWidth:100, align:'center',templet: function (d) {
                     return '<div style="text-align: right">'+(d.purchasingPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</div>'
                 }},
-            {field: 'amount', title: '库存金额(￥)', minWidth:120, align:'center',templet:function (d){
+            {field: 'amount', title: '库存金额(￥)', minWidth:120, align:'center',templet: function (d){
                     return '<div style="text-align: right">'+((d.inventoryQuantity * d.purchasingPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</div>';
                 }},
             {title: '操作', minWidth:180, templet:'#goodsListBar02',fixed:"right",align:"center"}

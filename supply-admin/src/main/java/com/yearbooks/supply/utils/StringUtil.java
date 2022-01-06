@@ -43,7 +43,7 @@ public class StringUtil {
      * @param code
      * @return
      */
-    public static String formatCode(String code){
+    public static String formatCode(String code){/*注意：code为参数名称，类型为string*/
         try {
             int length = code.length();
             Integer num = Integer.valueOf(code.substring(length-4,length))+1;

@@ -3,15 +3,16 @@ package com.yearbooks.supply.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yearbooks.supply.pojo.Goods;
-import com.yearbooks.supply.mapper.GoodsMapper;
-import com.yearbooks.supply.query.GoodsQuery;
-import com.yearbooks.supply.service.IGoodsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yearbooks.supply.mapper.GoodsMapper;
+import com.yearbooks.supply.pojo.Goods;
+import com.yearbooks.supply.query.GoodsQuery;
+import com.yearbooks.supply.service.ICustomerReturnListGoodsService;
+import com.yearbooks.supply.service.IGoodsService;
 import com.yearbooks.supply.service.IGoodsTypeService;
+import com.yearbooks.supply.service.ISaleListGoodsService;
 import com.yearbooks.supply.utils.AssertUtil;
 import com.yearbooks.supply.utils.PageResultUtil;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,7 +35,12 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Resource
     private IGoodsTypeService goodsTypeService;
-    private Object saleListGoodsService;
+
+    @Resource
+    private ISaleListGoodsService saleListGoodsService;
+
+    @Resource
+    private ICustomerReturnListGoodsService customerReturnListGoodsService;
 
     @Override
     public Map<String, Object> goodsList(GoodsQuery goodsQuery) {
@@ -125,6 +131,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void deleteStock(Integer id) {
         Goods temp = this.getById(id);
         AssertUtil.isTrue(null == temp, "待更新的商品记录不存在!");
@@ -136,6 +143,22 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public Goods getGoodsInfoById(Integer gid) {
         return this.baseMapper.getGoodsInfoById(gid);
+    }
+
+    @Override
+    public Map<String, Object> stockList(GoodsQuery goodsQuery) {
+        IPage<Goods> page = new Page<Goods>(goodsQuery.getPage(), goodsQuery.getLimit());
+        if (null != goodsQuery.getTypeId()){
+            goodsQuery.setTypeIds(goodsTypeService.queryAllSubTypeIdsByTypeId(goodsQuery.getTypeId()));
+        }
+        page = this.baseMapper.queryGoodsParams(page,goodsQuery);
+        List<Goods> goodsList = page.getRecords();
+        goodsList.forEach(g->{
+            g.setSaleTotal(saleListGoodsService.getSaleTotalByGoodsId(g.getId())-
+                    customerReturnListGoodsService.getReturnTotalByGoodsId(g.getId())
+            );
+        });
+        return PageResultUtil.getResult(page.getTotal(),page.getRecords());
     }
 
 }
