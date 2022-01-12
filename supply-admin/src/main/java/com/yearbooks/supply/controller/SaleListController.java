@@ -81,7 +81,15 @@ public class SaleListController {
         return saleListService.saleList(saleListQuery);
     }
 
-
-
-
+    /**
+     * 删除销售单据
+     * @param id
+     * @return
+     */
+    @RequestMapping("delete")
+    @ResponseBody
+    public RespBean delete(Integer id){
+        saleListService.deleteSaleList(id);
+        return RespBean.success("删除成功！");
+    }
 }

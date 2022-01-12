@@ -2,6 +2,11 @@ package com.yearbooks.supply.service;
 
 import com.yearbooks.supply.pojo.CustomerReturnList;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yearbooks.supply.pojo.CustomerReturnListGoods;
+import com.yearbooks.supply.query.CustomerReturnListQuery;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +18,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICustomerReturnListService extends IService<CustomerReturnList> {
 
+    String getNextCustomerReturnnumber();
+
+    void saveCustomerReturnList(CustomerReturnList customerReturnList, List<CustomerReturnListGoods> slgList);
+
+    Map<String, Object> customerReturnList(CustomerReturnListQuery customerReturnListQuery);
+
+    void deleteCustomerReturnList(Integer id);
 }

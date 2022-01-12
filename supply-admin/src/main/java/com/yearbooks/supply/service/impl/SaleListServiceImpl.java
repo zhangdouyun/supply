@@ -83,5 +83,14 @@ public class SaleListServiceImpl extends ServiceImpl<SaleListMapper, SaleList> i
         return PageResultUtil.getResult(page.getTotal(),page.getRecords());
     }
 
+    @Override
+    public void deleteSaleList(Integer id) {
 
+        /**
+         * 1.删除销售单；
+         * 2.删除销售单商品记录
+         */
+        AssertUtil.isTrue(!(saleListGoodsService.remove(new QueryWrapper<SaleListGoods>().eq("sale_list_id",id))),"销售单删除失败!");
+        AssertUtil.isTrue(!(this.removeById(id)),"删除失败!");
+    }
 }

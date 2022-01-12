@@ -4,20 +4,53 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.yearbooks.supply.pojo.CustomerReturnList">
-        <id column="id" property="id" />
-        <result column="amount_paid" property="amountPaid" />
-        <result column="amount_payable" property="amountPayable" />
-        <result column="customer_return_date" property="customerReturnDate" />
-        <result column="customer_return_number" property="customerReturnNumber" />
-        <result column="remarks" property="remarks" />
-        <result column="state" property="state" />
-        <result column="user_id" property="userId" />
-        <result column="customer_id" property="customerId" />
+        <id column="id" property="id"/>
+        <result column="amount_paid" property="amountPaid"/>
+        <result column="amount_payable" property="amountPayable"/>
+        <result column="customer_return_date" property="customerReturnDate"/>
+        <result column="customer_return_number" property="customerReturnNumber"/><!--注意转化-->
+        <result column="remarks" property="remarks"/>
+        <result column="state" property="state"/>
+        <result column="user_id" property="userId"/>
+        <result column="customer_id" property="customerId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amount_paid, amount_payable, customer_return_date, customer_return_number, remarks, state, user_id, customer_id
+        id
+        , amount_paid, amount_payable, customer_return_date, customer_return_number, remarks, state, user_id, customer_id
     </sql>
+    <select id="getNextCustomerReturnNumber" resultType="java.lang.String">
+        select max(customer_return_number) as customerReturnNumber
+        from t_customer_return_list
+        where to_days(customer_return_date) = to_days(now())
+    </select>
+    <select id="customerReturnList" resultType="com.yearbooks.supply.pojo.CustomerReturnList">
+        select
+        tcrl.*,
+        tu.user_name as userName, /*注意逗号不能少*/
+        tc.NAME as customerName
+        from
+        t_customer_return_list tcrl
+        left join t_user tu on tcrl.user_id = tu.id
+        left join t_customer tc on tcrl.customer_id = tc.id
+        <where>
+            <if test="null != customerReturnListQuery.customerReturnNumber and customerReturnListQuery.customerReturnNumber !='' ">
+                tcrl.customer_return_number =#{customerReturnListQuery.customerReturnNumber}
+            </if>
+            <if test="null != customerReturnListQuery.customerId">
+                and tcrl.customer_id =#{customerReturnListQuery.customerId}
+            </if>
+            <if test="null != customerReturnListQuery.state">
+                and tcrl.state =#{customerReturnListQuery.state}
+            </if>
+            <if test="null != customerReturnListQuery.startDate and customerReturnListQuery.startDate !='' ">
+                and tcrl.customer_return_date &gt;= #{customerReturnListQuery.startDate}
+            </if>
+            <if test="null != customerReturnListQuery.endDate and customerReturnListQuery.endDate !='' ">
+                and tcrl.customer_return_date &lt;= #{customerReturnListQuery.endDate}
+            </if>
+        </where>
+    </select>
 
 </mapper>

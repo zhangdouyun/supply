@@ -2,6 +2,9 @@ package com.yearbooks.supply.service;
 
 import com.yearbooks.supply.pojo.SaleListGoods;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yearbooks.supply.query.SaleListGoodsQuery;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -14,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ISaleListGoodsService extends IService<SaleListGoods> {
 
     Integer getSaleTotalByGoodsId(Integer id);
+
+    Map<String, Object> saleListGoodsList(SaleListGoodsQuery saleListGoodsQuery);
 }

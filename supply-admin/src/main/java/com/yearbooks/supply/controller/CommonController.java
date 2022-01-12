@@ -80,4 +80,16 @@ public class CommonController {
     }
 
 
+    /**
+     * 报损页面
+     * @return
+     */
+    @RequestMapping("toDamageOverflowSearchPage")
+    public String index(){
+        return "common/damage_overflow_search";
+    }
+
+
+
+
 }

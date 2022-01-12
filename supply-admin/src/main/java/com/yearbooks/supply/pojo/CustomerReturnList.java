@@ -1,14 +1,19 @@
 package com.yearbooks.supply.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * <p>
@@ -37,7 +42,9 @@ public class CustomerReturnList implements Serializable {
     private Float amountPayable;
 
     @ApiModelProperty(value = "退货日期")
-    private LocalDateTime customerReturnDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private Date customerReturnDate;
 
     @ApiModelProperty(value = "退货单号")
     private String customerReturnNumber;
@@ -54,5 +61,9 @@ public class CustomerReturnList implements Serializable {
     @ApiModelProperty(value = "客户id")
     private Integer customerId;
 
+    @TableField(exist = false)
+    private String userName;
 
+    @TableField(exist = false)
+    private String customerName;
 }

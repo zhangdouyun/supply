@@ -23,4 +23,6 @@ public interface ISaleListService extends IService<SaleList> {
     void saveSaleList(SaleList saleList, List<SaleListGoods> slgList);
 
     Map<String, Object> saleList(SaleListQuery saleListQuery);
+
+    void deleteSaleList(Integer id);
 }
