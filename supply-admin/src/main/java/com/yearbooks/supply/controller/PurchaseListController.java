@@ -97,4 +97,23 @@ public class PurchaseListController {
         purchaseListService.deletePurchaseList(id);
         return RespBean.success("删除成功!");
     }
+
+    @RequestMapping("update")
+    @ResponseBody
+    public RespBean update(Integer id){
+        purchaseListService.updatePurchaseListState(id);
+        return RespBean.success("状态更新成功!");
+    }
+
+    /**
+     * 商品采购查询接口
+     * @param purchaseListQuery
+     * @return
+     */
+    @RequestMapping("countPurchase")
+    @ResponseBody
+    public Map<String,Object> countPurchase(PurchaseListQuery purchaseListQuery){
+        return purchaseListService.countPurchase(purchaseListQuery);
+    }
+
 }

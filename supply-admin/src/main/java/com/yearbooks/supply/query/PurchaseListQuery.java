@@ -3,6 +3,7 @@ package com.yearbooks.supply.query;
 import lombok.Data;
 
 import javax.print.attribute.IntegerSyntax;
+import java.util.List;
 
 /**
  * @author zhangdouyun
@@ -17,7 +18,13 @@ public class PurchaseListQuery extends BaseQuery {
     private String purchaseNumber;
     private Integer supplierId;
     private Integer state;
+
     private String startDate;
     private String endDate;
+    private String goodsName;
+    private Integer typeId;
+    private List<Integer> typeIds;
+
+    public Integer index;
 
 }

@@ -73,7 +73,6 @@
 		</fieldset>
 	</blockquote>
 	<table id="customerReturnList" class="layui-table"  lay-filter="customerReturns"></table>
-
 	<#--操作-->
 	<script id="goodsListBar" type="text/html">
 		<a class="layui-btn layui-btn-xs" id="edit" lay-event="edit">编辑</a>

@@ -49,7 +49,7 @@
 									<div class="layui-row">
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">开始日期</label>
-											<div class="layui-input-block"style="width: 60%">
+											<div class="layui-input-block">
 												<input type="text" name="startDate" id="startDate" lay-verify="startDate"
 													   placeholder="yyyy-MM-dd" autocomplete="off" readonly="readonly" class="layui-input">
 											</div>
@@ -57,15 +57,17 @@
 
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">结束日期</label>
-											<div class="layui-input-block"style="width: 60%">
+											<div class="layui-input-block">
 												<input type="text" name="endDate" id="endDate" lay-verify="endDate"
 													   placeholder="yyyy-MM-dd" autocomplete="off" readonly="readonly" class="layui-input">
 											</div>
 										</div>
 										<div class="layui-col-xs4">
 											<label class="layui-form-label"></label>
-											<a class="layui-btn layui-btn-normal search_btn" data-type="reload"><i
-														class="layui-icon">&#xe615;</i> 搜索</a>
+											<div class="layui-input-block">
+												<a class="layui-btn layui-btn-normal search_btn" data-type="reload"><i
+															class="layui-icon">&#xe615;</i> 搜索</a>
+											</div>
 										</div>
 									</div>
 									<br/>
@@ -98,21 +100,21 @@
 									<div class="layui-row">
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">退货单号</label>
-											<div class="layui-input-block"style="width: 110px">
+											<div class="layui-input-block" style="width: 55%">
 												<input type="text" class="layui-input customerReturnNumber_"
 													   name="customerReturnNumber_" id="customerReturnNumber_" readonly="readonly" >
 											</div>
 										</div>
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">客户名称</label>
-											<div class="layui-input-block"style="width: 110px">
+											<div class="layui-input-block"style="width: 55%">
 												<input type="text" class="layui-input customerName"
 													   name="customerName_" id="customerName_"  readonly="readonly" >
 											</div>
 										</div>
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">退货金额</label>
-											<div class="layui-input-block"style="width: 80px">
+											<div class="layui-input-block">
 												<input type="text" class="layui-input purchaseNumber"
 													   name="amountPayable_" id="amountPayable_" readonly="readonly" >
 											</div>
@@ -122,20 +124,23 @@
 									<div class="layui-row">
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">支付状态</label>
-											<div class="layui-input-block"style="width: 110px">
+											<div class="layui-input-block"style="width: 55%">
 												<input type="state_" id="state_"  class="layui-input" readonly="readonly" >
 											</div>
 										</div>
 
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">操作人员</label>
-											<div class="layui-input-block"style="width: 110px">
+											<div class="layui-input-block"style="width: 55%">
 												<input type="text"  name="userName_" id="userName_" class="layui-input" readonly="readonly" >
 											</div>
 										</div>
-										<div class="layui-col-xs4">
-											<label style="width: 70px" class="layui-form-label"></label>
-											<a class="layui-btn layui-btn-normal search_btn02" data-type="reload"><i class="layui-icon">&#xe615;</i> 重置</a>
+
+										<div class="layui-col-xs2 layui-col-xs-offset1">
+											<#--<label class="layui-form-label"></label>-->
+											<div>
+												<a class="layui-btn layui-btn-normal search_btn02" data-type="reload"style="margin-left: 30px"><i class="layui-icon">&#xe615;</i> 重置</a>
+											</div>
 										</div>
 									</div>
 									<br/>

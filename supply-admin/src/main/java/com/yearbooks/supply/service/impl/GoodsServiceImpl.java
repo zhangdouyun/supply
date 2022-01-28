@@ -45,11 +45,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public Map<String, Object> goodsList(GoodsQuery goodsQuery) {
         IPage<Goods> page = new Page<Goods>(goodsQuery.getPage(), goodsQuery.getLimit());
-
         if (null != goodsQuery.getTypeId()) {
             goodsQuery.setTypeIds(goodsTypeService.queryAllSubTypeIdsByTypeId(goodsQuery.getTypeId()));
         }
-
         page = this.baseMapper.queryGoodsParams(page, goodsQuery);
         return PageResultUtil.getResult(page.getTotal(), page.getRecords());
     }

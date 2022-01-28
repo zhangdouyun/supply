@@ -2,6 +2,8 @@ package com.yearbooks.supply.query;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author zhangdouyun
  * @version 1.0
@@ -16,5 +18,8 @@ public class SaleListQuery extends BaseQuery {
     private Integer state;
     private String startDate;
     private String endDate;
-
+    private String goodsName;
+    private Integer typeId;
+    private List<Integer> typeIds;
+    public Integer index;
 }

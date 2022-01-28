@@ -9,7 +9,6 @@ layui.use(['element', 'laydate', 'table', 'layer'], function () {
         elem: '#saleDate'
     });
 
-
     $.ajax({
         type: "post",
         url: ctx + "/customer/allCustomers",
@@ -49,7 +48,6 @@ layui.use(['element', 'laydate', 'table', 'layer'], function () {
             case "add":
                 openGoodsDialog();
                 break;
-
         }
         ;
     });

@@ -25,4 +25,12 @@ public interface ISaleListService extends IService<SaleList> {
     Map<String, Object> saleList(SaleListQuery saleListQuery);
 
     void deleteSaleList(Integer id);
+
+    void updateSaleListState(Integer id);
+
+    Map<String, Object> countSale(SaleListQuery saleListQuery);
+
+    List<Map<String, Object>> countDaySale(String begin, String end);
+
+    List<Map<String, Object>> countSaleByMonth(String begin, String end);
 }

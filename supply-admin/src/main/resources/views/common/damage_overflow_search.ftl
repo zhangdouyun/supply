@@ -11,7 +11,7 @@
 		<!-- 左树 -->
 		<div class="layui-col-sm12 layui-col-md4 layui-col-lg3" style="width: 55%" >
 			<div class="layui-card">
-				<div class="layui-card-body" style="background: linear-gradient(steelblue,white)">
+				<div class="layui-card-body" >
 					<form class="layui-form" >
 						<blockquote class="layui-elem-quote quoteBox" >
 							<form class="layui-form">
@@ -70,7 +70,7 @@
 		<!-- 右表 -->
 		<div class="layui-col-sm12 layui-col-md8 layui-col-lg9" style="width: 45%">
 			<div class="layui-card">
-				<div class="layui-card-body"style="background: linear-gradient(steelblue,white)">
+				<div class="layui-card-body">
 					<form class="layui-form" >
 						<blockquote class="layui-elem-quote quoteBox">
 							<form class="layui-form">
@@ -94,9 +94,8 @@
 										</div>
 										<div class="layui-col-xs4">
 											<label class="layui-form-label">类型</label>
-											<div class="layui-input-block"style="width: 45%">
-												<input type="text" class="layui-input typeName"
-													   name="typeName_" id="typeName_" readonly="readonly" >
+											<div class="layui-input-block">
+												<input type="text" class="layui-input typeName" name="typeName_" id="typeName_" readonly="readonly" >
 											</div>
 										</div>
 									</div>
@@ -108,11 +107,11 @@
 												<input type="userName_" id="userName_"  class="layui-input" readonly="readonly" >
 											</div>
 										</div>
-
 										<div class="layui-col-xs4">
 											<label class="layui-form-label"></label>
-											<a class="layui-btn search_btn02" data-type="reload"><i
-														class="layui-icon">&#xe615;</i> 重置</a>
+											<div class="layui-input-block">
+												<a class="layui-btn  search_btn02" data-type="reload"><i class="layui-icon">&#xe615;</i> 重置</a>
+											</div>
 										</div>
 									</div>
 									<br/>
@@ -121,7 +120,6 @@
 						</blockquote>
 						<table id="rightList" class="layui-table"  lay-filter="rightList"></table>
 					</form>
-
 				</div>
 			</div>
 		</div>

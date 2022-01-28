@@ -190,11 +190,6 @@ layui.use(['laydate','table','layer'],function() {
             }
         }
     });
-
-
-
-
-
     // 重置
     $(".search_btn02").on("click",function(){
         resetListGoodsTab();

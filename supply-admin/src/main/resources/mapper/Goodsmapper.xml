@@ -35,7 +35,6 @@
             <if test="null != goodsQuery.goodsName and goodsQuery.goodsName !=''">
                 and g.name like concat('%',#{goodsQuery.goodsName},'%')
             </if>
-
             <if test="null!=goodsQuery.type">
                 <if test="goodsQuery.type==1">
                     and inventory_quantity=0
@@ -43,9 +42,10 @@
                 <if test="goodsQuery.type==2">
                     and inventory_quantity &gt; 0
                 </if>
-
+                <if test="goodsQuery.type==3">
+                    and inventory_quantity &lt; min_num
+                </if>
             </if>
-
             <if test="null!=goodsQuery.typeIds and goodsQuery.typeIds.size>0">
                 and g.type_id in
                 <foreach collection="goodsQuery.typeIds" item="typeId" open="(" separator="," close=")">

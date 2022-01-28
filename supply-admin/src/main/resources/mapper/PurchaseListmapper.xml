@@ -4,34 +4,35 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.yearbooks.supply.pojo.PurchaseList">
-        <id column="id" property="id" />
-        <result column="amount_paid" property="amountPaid" />
-        <result column="amount_payable" property="amountPayable" />
-        <result column="purchase_date" property="purchaseDate" />
-        <result column="remarks" property="remarks" />
-        <result column="state" property="state" />
-        <result column="purchase_number" property="purchaseNumber" />
-        <result column="supplier_id" property="supplierId" />
-        <result column="user_id" property="userId" />
+        <id column="id" property="id"/>
+        <result column="amount_paid" property="amountPaid"/>
+        <result column="amount_payable" property="amountPayable"/>
+        <result column="purchase_date" property="purchaseDate"/>
+        <result column="remarks" property="remarks"/>
+        <result column="state" property="state"/>
+        <result column="purchase_number" property="purchaseNumber"/>
+        <result column="supplier_id" property="supplierId"/>
+        <result column="user_id" property="userId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, amount_paid, amount_payable, purchase_date, remarks, state, purchase_number, supplier_id, user_id
+        id
+        , amount_paid, amount_payable, purchase_date, remarks, state, purchase_number, supplier_id, user_id
     </sql>
     <select id="getNextPurchaseNumber" resultType="java.lang.String">
         select max(purchase_number) as purchaseNumber
         from supply.t_purchase_list
-        where to_days(purchase_date)=to_days(now())
+        where to_days(purchase_date) = to_days(now())
     </select>
     <select id="purchaseList" resultType="com.yearbooks.supply.pojo.PurchaseList">
         SELECT
-            pl.*,
-            u.user_name AS userName,
-            s.name AS supplierName
+        pl.*,
+        u.user_name AS userName,
+        s.name AS supplierName
         FROM t_purchase_list pl
-                 LEFT JOIN t_user AS u ON pl.user_id = u.id
-                 LEFT JOIN t_supplier AS s ON pl.supplier_id = s.id
+        LEFT JOIN t_user u ON pl.user_id = u.id
+        LEFT JOIN t_supplier s ON pl.supplier_id = s.id
         <where>
             <if test="null != purchaseListQuery.purchaseNumber and purchaseListQuery.purchaseNumber !='' ">
                 pl.purchase_number = #{purchaseListQuery.purchaseNumber}
@@ -51,5 +52,53 @@
         </where>
     </select>
 
-
+    <select id="countPurchaseList" resultType="com.yearbooks.supply.model.CountResultModel">
+        SELECT
+            tpl.purchase_number AS number,
+            tpl.purchase_date AS date,
+	        ts.`name` AS `name`,
+            plg.`code`,
+            plg.`name` AS goodsName,
+            plg.model,
+            plg.unit AS unitName,
+            plg.price,
+            plg.num,
+            plg.total,
+            gt.`name` AS typeName
+        FROM
+            t_purchase_list AS tpl
+            LEFT JOIN t_supplier AS ts ON tpl.supplier_id = ts.id
+            LEFT JOIN t_purchase_list_goods AS plg ON tpl.id = plg.purchase_list_id
+            LEFT JOIN t_goods_type AS gt ON plg.type_id = gt.id
+        <where>
+            <if test="null != purchaseListQuery.startDate and purchaseListQuery.startDate !='' ">
+                and purchase_date &gt;= #{purchaseListQuery.startDate}
+            </if>
+            <if test="null != purchaseListQuery.endDate and purchaseListQuery.endDate !='' ">
+                and purchase_date &lt;= #{purchaseListQuery.endDate}
+            </if>
+            <if test="null != purchaseListQuery.goodsName and purchaseListQuery.goodsName !='' ">
+                and (
+                    plg.name like concat('%',#{purchaseListQuery.goodsName},'%') or plg.code =#{purchaseListQuery.goodsName}
+                )
+            </if>
+            <if test="null != purchaseListQuery.typeIds and purchaseListQuery.typeIds.size>0">
+                and plg.type_id in
+                <foreach collection="purchaseListQuery.typeIds" item="typeId" open="(" separator= "," close= ")">
+                    #{typeId}
+                </foreach>
+            </if>
+        </where>
+        LIMIT #{purchaseListQuery.index},#{purchaseListQuery.limit}
+    </select>
+    <!--查询总数-->
+    <select id="countPurchaseTotal" resultType="java.lang.Long">
+        select
+            count(*)
+        from
+            t_purchase_list AS tpl
+            LEFT JOIN t_supplier AS ts ON tpl.supplier_id = ts.id
+            LEFT JOIN t_purchase_list_goods AS plg ON tpl.id = plg.purchase_list_id
+            LEFT JOIN t_goods_type AS gt ON plg.type_id = gt.id
+    </select>
 </mapper>
